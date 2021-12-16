@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+        git:
+                build: $PWD/git/
+                environment:
+                        - REPOSITORY_HTTPS_URL=${REPOSITORY_HTTPS_URL}
+                volumes:
+                        - "repo:/root/repo"
+        lighttpd:
+                build: $PWD/lighttpd/        
+                ports: 
+                        - ${PORT}:80
+                volumes:
+                        - "repo:/var/www/html"
+
+volumes:
+        repo:
